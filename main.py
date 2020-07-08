@@ -1,5 +1,5 @@
 import pygame
 from globals import *
-from screen import start_screen
+from screen import start_screen, game_screen
 
-start_screen()
+game_screen()
