@@ -1,5 +1,5 @@
-from globals import *
-from classes import GameObject
+from glob_var import *
+from classes import GameObject, Plane, Missile
 
 def Screen(func):
 
@@ -21,19 +21,25 @@ def start_screen():
 	root.fill((255, 255, 255))
 
 def game_screen():
-	x = GameObject(50, 50, 2, 0)
+
+	Missile(20, 250, 3, 0)
 
 	@Screen
 	def move_handler():
 		root.fill((255, 255, 255))
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_LEFT]:
-			x.dirn -= 2
+			Player.dirn += 2
 		elif keys[pygame.K_RIGHT]:
-			x.dirn += 2 
+			Player.dirn -= 2
 
-		x.move()
-		x.draw()
+		Player.update_cart_vel()
+		Player.draw()
+
+		for missile in missiles:
+			missile.update_vel(Player)
+			missile.move()
+			missile.draw()
 
 	move_handler()
 

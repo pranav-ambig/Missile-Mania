@@ -1,5 +1,5 @@
 import pygame
-from globals import *
+from glob_var import *
 from screen import start_screen, game_screen
 
 game_screen()
