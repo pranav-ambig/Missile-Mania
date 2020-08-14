@@ -1,5 +1,7 @@
-from glob_var import *
+# from glob_var import *
+from main import WIDTH, HEIGHT, CEN_X, CEN_Y, FPS, missiles, root, clock
 from classes import GameObject, Plane, Missile
+import pygame
 
 def Screen(func):
 
@@ -22,10 +24,13 @@ def start_screen():
 
 def game_screen():
 
-	Missile(20, 250, 3, 0)
+	Missile(50, 20, 3, 0)
 
 	@Screen
 	def move_handler():
+		from main import createPlayer
+		createPlayer()
+		from main import Player
 		root.fill((255, 255, 255))
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_LEFT]:

@@ -1,5 +1,7 @@
-from glob_var import *
+# from glob_var import *
+from main import WIDTH, HEIGHT, CEN_X, CEN_Y, FPS, missiles, root, clock
 from math import sin, cos, radians, degrees, atan
+import pygame
 
 class GameObject:
 
@@ -7,7 +9,7 @@ class GameObject:
 		self.x = x
 		self.y = y
 		self.v = v
-		self.dirn = 0
+		self.dirn = dirn
 		self.w = 20
 		self.h = 20
 		self.update_cart_vel()
@@ -29,6 +31,14 @@ class Missile(GameObject):
 	def __init__(self, x, y, v, dirn):
 		super().__init__(x, y, v, dirn)
 		missiles.append(self)
+		img = pygame.image.load('assets/missile1.png')
+		self.img = img
+
+	def draw(self):
+		img = pygame.transform.rotate(self.img, -self.dirn)
+		img_r = img.get_rect()
+		img_r.center = self.x, self.y
+		root.blit(img, (img_r))
 
 	def move(self):
 		self.x += self.vx
