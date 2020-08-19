@@ -21,10 +21,29 @@ class GameObject:
 		self.vx = self.v*cos(radians(self.dirn))
 		self.vy = self.v*sin(radians(self.dirn))
 
+
+
 class Plane(GameObject):
 
 	def __init__(self, x, y, v, dirn):
 		super().__init__(x, y, v, dirn)
+		self.sa = 0 #scroll amount
+		# self.ga = 0
+
+	def move(self):
+		if self.x >= WIDTH-self.w-20 and self.vx >  0:
+			self.sa -= self.vx
+		elif self.x <= self.w+20 and self.vx < 0:
+			self.sa += -self.vx
+		else:
+			self.x += self.vx
+		self.y += self.vy
+
+		
+		# self.ga = -x
+
+		# print(self.ga)
+
 
 class Missile(GameObject):
 
@@ -39,10 +58,6 @@ class Missile(GameObject):
 		img_r = img.get_rect()
 		img_r.center = self.x, self.y
 		root.blit(img, (img_r))
-
-	def move(self):
-		self.x += self.vx
-		self.y += self.vy
 
 	def update_dirn(self):
 		dx = CEN_X-self.x
